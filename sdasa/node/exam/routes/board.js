@@ -60,7 +60,7 @@ router.delete("/:no", (req, res) => {
       resultData.result = true;
       resultData.data = req.body;
     } else {
-      resultData.result = false;
+      resultData.result = false{result[]};
     }
     res.send(resultData);
   });
