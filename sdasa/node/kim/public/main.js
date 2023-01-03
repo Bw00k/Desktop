@@ -9,7 +9,7 @@ const port = 5500;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   session({
-    secret: "~~~", // 원하는 문자 입력
+    secret: "~~1~", // 원하는 문자 입력
     resave: false,
     saveUninitialized: true,
     store: new FileStore(),
