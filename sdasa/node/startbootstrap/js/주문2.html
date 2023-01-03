@@ -94,6 +94,7 @@
     <script>
       function order() {
         alert("주문이 완료되었습니다!");
+        ocation.href = "http://127.0.0.1:5500/startbootstrap/index.html?#";
       }
       function cancel() {
         alert("주문이 취소되었습니다!");
@@ -142,13 +143,6 @@
               </ul>
             </li>
           </ul>
-          <form class="d-flex">
-            <button class="btn btn-outline-dark" type="submit">
-              <i class="bi-cart-fill me-1"></i>
-              Cart
-              <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </button>
-          </form>
         </div>
       </div>
     </nav>
@@ -238,13 +232,6 @@
       >
         취소하기
       </button>
-      <form class="btn-order">
-        <button class="btn btn-outline-dark btn-order" type="submit">
-          <i class="bi-cart-fill me-1"></i>
-          Cart
-          <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-        </button>
-      </form>
     </div>
     <footer class="py-5 bg-dark">
       <div class="container">
