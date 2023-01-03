@@ -157,10 +157,20 @@
                   />
                 </div>
               </div>
-              <button class="btn btn-outline-dark flex-shrink-0" type="button">
-
-                주문하기
-              </button>
+              <button
+              type="button"
+              onclick="order()"
+              class="btn btn-outline-dark flex-shrink-0"
+            >
+              주문하기
+            </button>
+            <button
+              type="button"
+              onclick="cancel()"
+              class="btn btn-outline-dark flex-shrink-0"
+            >
+              취소하기
+            </button>
             </div>
           </div>
         </div>
@@ -301,20 +311,6 @@
           Copyright &copy; Your Website 2023
         </p>
       </div>
-      <button
-        type="button"
-        onclick="order()"
-        class="btn btn-outline-dark flex-shrink-0"
-      >
-        주문하기
-      </button>
-      <button
-        type="button"
-        onclick="cancel()"
-        class="btn btn-outline-dark flex-shrink-0"
-      >
-        취소하기
-      </button>
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

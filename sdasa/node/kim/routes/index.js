@@ -5,6 +5,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   const sql = "select * from product";
+  console.log('sql',sql)
   pool.query(sql, (err, result) => {
     res.render("index", { list: result });
   });
