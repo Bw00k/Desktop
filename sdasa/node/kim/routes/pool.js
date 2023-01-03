@@ -4,7 +4,7 @@ const mysql = require("mysql"); //mysql 모듈 로드
 const conn = {
   host: "localhost",
   port: "3306",
-  user: "dev01",
+  user: "root",
   password: "1234",
   database: "dev",
   connectionLimit: 10,
