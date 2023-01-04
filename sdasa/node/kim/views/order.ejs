@@ -29,6 +29,17 @@
         alert("주문이 취소되었습니다!");
         location.href = "/shop";
       }
+      addbtn.addEventListener("click", function (ev) {
+  let addObj = {
+    no: no.value,
+    pname: pname.value,
+    prodno: prodno.value,
+    address: address.value,
+    phone: phone.value,
+  };
+  ctmid.push(addObj);
+});
+
     </script>
   </head>
     <!-- Navigation-->
