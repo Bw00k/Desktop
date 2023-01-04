@@ -3,9 +3,9 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  const sql = "select * from product";
-  pool.query(sql, (err, result) => {
+router.get('/:prodnum', function(req, res, next) {
+  const sql = "select * from product where = ?";
+  pool.query(sql,"/:prodnum",(err, result) => {
     res.render("order", { list: result });
   });
 });
