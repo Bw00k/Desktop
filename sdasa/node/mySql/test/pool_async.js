@@ -11,4 +11,12 @@ const conn = {
 };
 //let connection = mysql.createConnection(`mysql://hr:pass01@192.168.0.)
 let pool = mysql.createPool(conn); //DB커넥션 생성
-module.exports = pool;
+function query(sql, data = null) {
+  return new Promise((resolve, reject) => {
+    pool.query(sql, (err, data, results, fields) => {
+      resolve(results);
+    });
+  });
+}
+
+module.exports = { pool, query };

@@ -10,14 +10,14 @@
     <meta name="author" content="" />
     <title>제품 상세페이지</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="/kim/assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <!-- Bootstrap icons-->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
       rel="stylesheet"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="./stylesheets/styles.css" rel="stylesheet" />
+    <link href="/stylesheets/styles.css" rel="stylesheet" />
   </head>
   <body>
      <script>
@@ -34,7 +34,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/index.html">Shop</a>
+        <a class="navbar-brand" href="/shop">Shop</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -49,7 +49,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="/shop">Home</a>
             </li>
             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             <li class="nav-item dropdown">
@@ -63,7 +63,7 @@
                 >Shop</a
               >
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">전제 상품</a></li>
+                <li><a class="dropdown-item" href="#!">전체 상품</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="#!">인기 상품</a></li>
                 <li><a class="dropdown-item" href="#!">신규 상품</a></li>
@@ -84,25 +84,27 @@
     <section class="py-5">
       <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
+ <% for( let i=0; i<1; i++) { %>
           <div class="col-md-6">
             <img
-              class="card-img-top mb-5 mb-md-0"
-              src="../img/11.jpg"
+              class="card-img-top1 mb-5 mb-md-0"
+              src="<%=list[i].image %>"
               alt="..."
             />
           </div>
           <div class="col-md-6">
-            <div class="small mb-1">상품 코드</div>
-            <h1 class="display-5 fw-bolder">상품명</h1>
+            <!--<div class="small mb-1">상품 코드</div>-->
+            <h1 class="display-5 fw-bolder"><%=list[i].name %></h1>
             <div class="fs-5 mb-5">
-              <span>12,000원</span>
+              <span><%=list[i].price %>원</span>
+              <% } %>
               <div class="item-order">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"
                       >주문자 이름</span
                     >
-                  </div>
+                  </div>     
                   <input
                     type="text"
                     class="form-control"
@@ -118,15 +120,15 @@
                       >수량</label
                     >
                   </div>
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>-- 수량을 선택하세요 --</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="3">4</option>
-                    <option value="3">5</option>
-                    <option value="3">6</option>
-                  </select>
+                  <div class="updown">
+
+                    <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="2">
+
+                    <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
+
+                    <span><i class="fas fa-arrow-alt-circle-down down"></i></span>
+
+                </div>
                 </div>
 
                 <div class="input-group mb-3">
@@ -159,6 +161,7 @@
               </div>
               <button
   type="button"
+  id = "addbtn"
   onclick="order()"
   class="btn btn-outline-dark flex-shrink-0"
 >
@@ -183,127 +186,41 @@
         <div
           class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
         >
+         <% for( let i=0; i<list.length; i++) { %>
           <div class="col mb-5">
             <div class="card h-100">
               <!-- Product image-->
               <img
                 class="card-img-top"
-                src="../img/22.jpg"
+                src="<%=list[i].image %>""
                 alt="..."
               />
               <!-- Product details-->
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
-                  <h5 class="fw-bolder">상품</h5>
+                
+                  <h5 class="fw-bolder"><%=list[i].name %></h5>
                   <!-- Product price-->
-                  22,000원
+                  <%=list[i].price %>원
                 </div>
               </div>
+                        
               <!-- Product actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
                   <a
                     class="btn btn-outline-dark mt-auto"
-                    href="/order.html#"
-                    target="_blank"
-                    >주문하기</a
+                    value='<%=list[i].prodnum %>' 
+                    href="/order/<%=list[i].prodnum %>"
+                    >상품구매</a
                   >
                 </div>
               </div>
             </div>
           </div>
-          <div class="col mb-5">
-            <div class="card h-100">
-              <!-- Sale badge-->
-              <div
-                class="badge position-absolute"
-                style="top: 0.5rem; right: 0.5rem"
-              ></div>
-              <!-- Product image-->
-              <img
-                class="card-img-top"
-                src="../"
-                alt="..."
-              />
-              <!-- Product details-->
-              <div class="card-body p-4">
-                <div class="text-center">
-                  <!-- Product name-->
-                  <h5 class="fw-bolder">상품</h5>
-                  <!-- Product reviews-->
-                  <!-- Product price-->
-                  17,000원
-                </div>
-              </div>
-              <!-- Product actions-->
-              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" href="#">주문하기</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col mb-5">
-            <div class="card h-100">
-              <!-- Sale badge-->
-              <div
-                class="badge position-absolute"
-                style="top: 0.5rem; right: 0.5rem"
-              ></div>
-              <!-- Product image-->
-              <img
-                class="card-img-top"
-                src="g"
-                alt="..."
-              />
-              <!-- Product details-->
-              <div class="card-body p-4">
-                <div class="text-center">
-                  <!-- Product name-->
-                  <h5 class="fw-bolder">상품</h5>
-                  <!-- Product price-->
-                  25,000원
-                </div>
-              </div>
-              <!-- Product actions-->
-              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" href="#">주문하기</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col mb-5">
-            <div class="card h-100">
-              <!-- Product image-->
-              <img
-                class="card-img-top"
-                src="/kim/img/stock-photo-fashion-beauty-model-curly-dark-hair-style-beautiful-sexy-pretty-woman-perfect-skinny-body-shape-1788851105.jpg"
-                alt="..."
-              />
-              <!-- Product details-->
-              <div class="card-body p-4">
-                <div class="text-center">
-                  <!-- Product name-->
-                  <h5 class="fw-bolder">상품</h5>
-                  <!-- Product reviews-->
-
-                  <!-- Product price-->
-                  40,000원
-                </div>
-              </div>
-              <!-- Product actions-->
-              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" href="#">주문하기</a>
-                </div>
-              </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+<% } %>
+         
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -316,6 +233,5 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
   </body>
 </html>

@@ -1,18 +1,13 @@
 var express = require("express");
-const pool = require("../test/pool");
+const pool = require("../test/pool_async");
 var router = express.Router();
 
 //전체조회
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   sql = "SELECT * FROM customers ";
 
   //pool.getconnection()
-  pool.query(sql, function (err, results, fields) {
-    if (err) {
-      console.log(err);
-    }
-    res.json(results);
-  });
+  let result = await pool.query(sql, function (err, results, data) {});
 });
 router.get("/:id", (req, res) => {
   const id = req.params.id;
