@@ -10,7 +10,7 @@
     <meta name="author" content="" />
     <title>제품 상세페이지</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/kim/assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -24,27 +24,21 @@
       function order() {
         alert("주문이 완료되었습니다!!");
         location.href = "/shop";
-      } 
+      }
       function cancel() {
         alert("주문이 취소되었습니다!");
         location.href = "/shop";
       }
-  function save() {
+      function save() {
         console.log("enter :: ")
-        const prod = document.getElementById("prod").value;
         const qty = document.getElementById("qty").value;
-        const uname = document.getElementById("uname").value;
-        const address = document.getElementById("address").value;
-        const phone = document.getElementById("phone").value;
-        //const price = document.getElementById("price").innerText;
+        const prodName = document.getElementById("prodName").innerText;
+        const price = document.getElementById("price").innerText;
 
         var data = {
-          prod: prod,
-          uname: uname,
-          //price: price,
+          prodName: prodName,
+          price: price,
           qty: qty,
-          address: address,
-          phone: phone,
         };
         console.log("data :: ", data);
 
@@ -61,43 +55,13 @@
             }
           })
       }
-        /* var sell_price;
-        var amount;
       
-        function init() {
-          
-          sell_price = document.sell_price.value;
-          amount = document.amount.value;
-          document.sum.value = sell_price;
-          change();
-        }
-        function change() {
-          hm = document.amount;
-
-          if (hm.value < 0) {
-            hm.value = 0;
-          }
-          var sum_ = parseInt(hm.value) * sell_price;
-          document.getElementById("my_sum").innerHTML = sum_;
-        }
- */
-
-function sum(){
-          const qty = document.getElementById("qty").value;
-        //const prodName = document.getElementById("prodName").innerText;
-        const sum = document.getElementById("sum").innerText;
-
-          document.getElementById("sum1").value = parseInt(qty) * parseInt(sum)
-          let nsum = document.getElementById("sum1").value
-          console.log(nsum);
-        }
-
     </script>
   </head>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/shop">Shop</a>
+        <a class="navbar-brand" href="/order">Shop</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -112,7 +76,7 @@ function sum(){
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/shop">Home</a>
+              <a class="nav-link active" aria-current="page" href="/order">Home</a>
             </li>
             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             <li class="nav-item dropdown">
@@ -126,7 +90,7 @@ function sum(){
                 >Shop</a
               >
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">전체 상품</a></li>
+                <li><a class="dropdown-item" href="#!">전제 상품</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="#!">인기 상품</a></li>
                 <li><a class="dropdown-item" href="#!">신규 상품</a></li>
@@ -135,8 +99,9 @@ function sum(){
           </ul>
           <form class="d-flex">
             <button class="btn btn-outline-dark" type="submit">
-              로그인
-              <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+              <i class="bi-cart-fill me-1"></i>
+              Cart
+              <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
             </button>
           </form>
         </div>
@@ -145,40 +110,35 @@ function sum(){
     <!-- Product section-->
     <section class="py-5">
       <div class="container px-4 px-lg-5 my-5">
+        <% for( let i=0; i<list.length; i++) { %>
         <div class="row gx-4 gx-lg-5 align-items-center">
- <% for( let i=0; i<1; i++) { %>
           <div class="col-md-6">
             <img
-              class="card-img-top1 mb-5 mb-md-0"
+              class="card-img-top mb-5 mb-md-0"
               src="<%=list[i].image %>"
               alt="..."
             />
           </div>
           <div class="col-md-6">
-            <!--<div class="small mb-1">상품 코드</div>-->
-            <h1 class="display-5 fw-bolder"><%=list[i].name %></h1>
+            <div class="small mb-1"></div>
+            <h1 id="prodName" class="display-5 fw-bolder"><%=list[i].name %></h1>
             <div class="fs-5 mb-5">
-              <span><%=list[i].price.toLocaleString() %>원</span>
-
+              <span id="price"><%=list[i].price %></span>
+              <% } %>
               <div class="item-order">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"
                       >주문자 이름</span
                     >
-                  </div>     
+                  </div>
                   <input
-                    id="uname"
+                    id="orderName"
                     type="text"
                     class="form-control"
                     placeholder=""
                     aria-label=""
                     aria-describedby="basic-addon1"
-                  />
-                  <input
-                    id="prod"
-                    type="hidden"
-                    value=<%=list[i].name %>
                   />
                 </div>
 
@@ -188,26 +148,22 @@ function sum(){
                       >수량</label
                     >
                   </div>
-                  <div class="updown">
-
-                    <input id="qty" type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="0">
-                    <input id="sum" type="hidden" name="sum" value=<%=list[i].price.toLocaleString() %>>
-                    <input type="hidden" name="sum1" size="11" readonly />
-                      금액 :
-                    <div id="sum2"></div>
-                    <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
-
-                    <span><i class="fas fa-arrow-alt-circle-down down"></i></span>
-
+                  <select class="custom-select" id="inputGroupSelect01">
+ 
+                  <input  id="qty" 
+                          type="text"
+                          name="amount"
+                          value="1"
+                          size="1"
+                          onchange="change();">
                 </div>
-                </div>
-              <% } %>
+                <input type="hidden" id="sum"name="sum" size="11" readonly />
+
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">주소</span>
                   </div>
                   <input
-                  id="address"
                     type="text"
                     class="form-control"
                     placeholder=""
@@ -223,7 +179,6 @@ function sum(){
                     >
                   </div>
                   <input
-                  id="phone"
                     type="text"
                     class="form-control"
                     placeholder=""
@@ -234,9 +189,9 @@ function sum(){
               </div>
               <button
   type="button"
-  id = "addbtn"
-  button onclick="save()"
+  onclick="save()"
   class="btn btn-outline-dark flex-shrink-0"
+  value="" href="/order"
 >
   주문하기
 </button>
@@ -252,50 +207,135 @@ function sum(){
         </div>
       </div>
     </section>
-
-   <!-- Related items section --> 
+    <!-- Related items section-->
     <section class="py-5 bg-light">
       <div class="container px-4 px-lg-5 mt-5">
         <h2 class="fw-bolder mb-4">상품</h2>
         <div
           class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
         >
-         <% for( let i=0; i<list.length; i++) { %>
           <div class="col mb-5">
             <div class="card h-100">
               <!-- Product image-->
               <img
                 class="card-img-top"
-                src="<%=list[i].image %>""
+                src="../img/22.jpg"
                 alt="..."
               />
               <!-- Product details-->
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
-                
-                  <h5 class="fw-bolder"><%=list[i].name %></h5>
+                  <h5 class="fw-bolder">상품</h5>
                   <!-- Product price-->
-                  <%=list[i].price %>원
+                  22,000원
                 </div>
               </div>
-                        
               <!-- Product actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
                   <a
                     class="btn btn-outline-dark mt-auto"
-                    value='<%=list[i].prodnum %>' 
-                    href="/order/<%=list[i].prodnum %>"
-                    >상품구매</a
+                    href="/order.html#"
+                    target="_blank"
+                    >주문하기</a
                   >
                 </div>
               </div>
             </div>
           </div>
-<% } %>
-         
-    </section>  
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              ></div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="../"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">상품</h5>
+                  <!-- Product reviews-->
+                  <!-- Product price-->
+                  17,000원
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#">주문하기</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              ></div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="g"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">상품</h5>
+                  <!-- Product price-->
+                  25,000원
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#">주문하기</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="/kim/img/stock-photo-fashion-beauty-model-curly-dark-hair-style-beautiful-sexy-pretty-woman-perfect-skinny-body-shape-1788851105.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">상품</h5>
+                  <!-- Product reviews-->
+
+                  <!-- Product price-->
+                  40,000원
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#">주문하기</a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
       <div class="container">
@@ -307,5 +347,8 @@ function sum(){
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
+    <script>
+      
+    </script>
   </body>
 </html>

@@ -29,6 +29,16 @@
         alert("주문이 취소되었습니다!");
         location.href = "/index.html";
       }
+      function sum(){
+          const qty = document.getElementById("qty").value;
+        //const prodName = document.getElementById("prodName").innerText;
+        const price = document.getElementById("price").innerText;
+
+          document.getElementById("sum").value = parseInt(qty) * parseInt(price)
+          let sum = document.getElementById("sum").value
+          console.log(sum);
+        }
+        sum();
     </script>
   </head>
     <!-- Navigation-->
@@ -118,16 +128,17 @@
                       >수량</label
                     >
                   </div>
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>-- 수량을 선택하세요 --</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="3">4</option>
-                    <option value="3">5</option>
-                    <option value="3">6</option>
-                  </select>
                 </div>
+                <input type="hidden" name="sell_price" value="1000" />
+      <input
+        type="text"
+        name="amount"
+        value="1"
+        size="1"
+        onchange="change();"
+      />
+
+      <input type="hidden" name="sum" size="11" readonly />
 
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
