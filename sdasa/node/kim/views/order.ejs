@@ -93,11 +93,11 @@ function sum(){
         }
 
     </script>
-  </head>
+
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/index.html">Shop</a>
+        <a class="navbar-brand" href="/order">Shop</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -112,7 +112,7 @@ function sum(){
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="/order">Home</a>
             </li>
             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             <li class="nav-item dropdown">
@@ -145,21 +145,20 @@ function sum(){
     <!-- Product section-->
     <section class="py-5">
       <div class="container px-4 px-lg-5 my-5">
-        <% for( let i=0; i<1 i++) { %>
+       <% for( let i=0; i<1; i++) { %>
         <div class="row gx-4 gx-lg-5 align-items-center">
- <% for( let i=0; i<1; i++) { %>
           <div class="col-md-6">
             <img
-              class="card-img-top mb-5 mb-md-0"
-              src="../img/11.jpg"
+              class="card-img-top1 mb-5 mb-md-0"
+              src="<%=list[i].image %>"
               alt="..."
             />
           </div>
           <div class="col-md-6">
-            <div class="small mb-1">상품 코드</div>
-            <h1 class="display-5 fw-bolder">상품명</h1>
+            <div class="small mb-1"></div>
+            <h1 class="display-5 fw-bolder"><%=list[i].name %></h1>
             <div class="fs-5 mb-5">
-              <span>12,000원</span>
+              <span><%=list[i].price %></span>
               <div class="item-order">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -178,7 +177,7 @@ function sum(){
                   <input
                     id="prod"
                     type="hidden"
-                    value=<%=list[i].name %>
+                    value="<%=list[i].name %>"
                   />
                 </div>
 
@@ -191,7 +190,7 @@ function sum(){
                   <div class="updown">
 
                     <input id="qty" type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="0">
-                    <input id="sum" type="hidden" name="sum" value=<%=list[i].price.toLocaleString() %>>
+                    <input id="sum" type="hidden" name="sum" value="<%=list[i].price.toLocaleString() %>">
                     <input type="hidden" name="sum1" size="11" readonly />
                       금액 :
                     <div id="sum2"></div>
@@ -237,7 +236,7 @@ function sum(){
   id = "addbtn"
   button onclick="save()"
   class="btn btn-outline-dark flex-shrink-0"
-  value='<% list[i].prodnum %>' href="/order"
+
 >
   주문하기
 </button>
