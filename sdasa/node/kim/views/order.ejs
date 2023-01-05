@@ -36,12 +36,15 @@
         const uname = document.getElementById("uname").value;
         const address = document.getElementById("address").value;
         const phone = document.getElementById("phone").value;
-        //const price = document.getElementById("price").innerText;
+        const endValue = document.getElementById("endValue").value;
+        const fPrice = document.getElementById("endValue").innerText;
+        console.log("fPirce 값 :" + fPrice);
+        const price = Number(fPrice);
 
         var data = {
           prod: prod,
           uname: uname,
-          //price: price,
+          price: price,
           qty: qty,
           address: address,
           phone: phone,
@@ -82,15 +85,49 @@
         }
  */
 
-function sum(){
-          const qty = document.getElementById("qty").value;
-        //const prodName = document.getElementById("prodName").innerText;
-        const sum = document.getElementById("sum").innerText;
+/* function sum(){}
+const qty = document.getElementById("qty");
+//const prodName = document.getElementById("prodName").innerText;
+//const log = document.getElementById('sum2');
+//const sum = document.getElementById("sum").innerText;
+ const log = document.getElementById('values');
+qty.addEventListener('input', updateValue);
 
-          document.getElementById("sum1").value = parseInt(qty) * parseInt(sum)
-          let nsum = document.getElementById("sum1").value
-          console.log(nsum);
-        }
+function updateValue(e) {
+  log.textContent = e.target.value;
+  console.log(updateValue)
+} */
+
+window.onload = function(){
+  const qty = document.getElementById("qty");
+  const sum = document.getElementById("sum").value;
+  const sum2 = document.getElementById("sum2");
+  const endValue = document.getElementById("endValue");
+  
+  qty.addEventListener("input", sumall);
+
+  function sumall(event) {
+    const value = event.target.value;
+    if(value == ""){
+      sum2.textContent = "0 원";
+      endValue.textContent = Number("0");
+    }
+    else {
+      const view = (parseInt(value)*parseInt(sum)).toLocaleString();
+      const endView = parseInt(value)*parseInt(sum);
+      console.log(endView.value);
+      console.log(typeof(endView));
+      
+      sum2.textContent = view + "원";
+      endValue.textContent = endView;
+    }
+    
+  }
+}
+
+
+
+
 
     </script>
 
@@ -158,7 +195,7 @@ function sum(){
             <div class="small mb-1"></div>
             <h1 class="display-5 fw-bolder"><%=list[i].name %></h1>
             <div class="fs-5 mb-5">
-              <span><%=list[i].price %></span>
+              <span><%=list[i].price.toLocaleString() %>원</span>
               <div class="item-order">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -187,13 +224,13 @@ function sum(){
                       >수량</label
                     >
                   </div>
-                  <div class="updown">
+                  <div class="updown" >
 
                     <input id="qty" type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="0">
-                    <input id="sum" type="hidden" name="sum" value="<%=list[i].price.toLocaleString() %>">
+                    <input id="sum" type="hidden" name="sum" value="<%=list[i].price %>">
                     <input type="hidden" name="sum1" size="11" readonly />
-                      금액 :
-                    <div id="sum2"></div>
+                      금액 : <div id="sum2" style="display: inline-block;">0 원</div>
+                    <input type="hidden" id="endValue">
                     <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
 
                     <span><i class="fas fa-arrow-alt-circle-down down"></i></span>

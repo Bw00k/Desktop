@@ -15,6 +15,7 @@ router.post("/", function (req, res, next) {
   const phone = req.body.phone;
   console.log("num :: ", num);
   console.log("price :: ", price);
+  console.log("uname :: " , uname);
   var sql = "";
   sql +=
     "insert into cust (prod,price, uname, address, phone, num) values (?,?,?,?,?,?) ";
